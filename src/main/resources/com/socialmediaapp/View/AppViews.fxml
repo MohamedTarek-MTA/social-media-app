@@ -1,14 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.socialmediaapp.View.AppViews"
-            prefHeight="400.0" prefWidth="600.0">
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.socialmediaapp.Controller.AppControllers">
+    <top>
+        <VBox spacing="8" styleClass="top-bar">
+            <padding><Insets top="10" right="12" bottom="10" left="12"/></padding>
+            <Label fx:id="currentUserLabel" text="Current user: Guest" styleClass="title-label"/>
+            <Label fx:id="statusLabel" text="Welcome to Social Media App" styleClass="status-label"/>
+        </VBox>
+    </top>
 
-</AnchorPane>
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Auth">
+                    <VBox spacing="10" styleClass="tab-content">
+                        <padding><Insets top="14" right="14" bottom="14" left="14"/></padding>
+                        <Label text="Register" styleClass="section-label"/>
+                        <HBox spacing="8">
+                            <TextField fx:id="registerNameField" promptText="Name"/>
+                            <TextField fx:id="registerEmailField" promptText="Email"/>
+                            <PasswordField fx:id="registerPasswordField" promptText="Password"/>
+                            <Button text="Register" onAction="#onRegister"/>
+                        </HBox>
+                        <Label text="Login" styleClass="section-label"/>
+                        <HBox spacing="8">
+                            <TextField fx:id="loginEmailField" promptText="Email"/>
+                            <PasswordField fx:id="loginPasswordField" promptText="Password"/>
+                            <Button text="Login" onAction="#onLogin"/>
+                            <Button text="Logout" onAction="#onLogout"/>
+                        </HBox>
+                    </VBox>
+                </Tab>
+
+                <Tab text="Profile">
+                    <VBox spacing="10" styleClass="tab-content">
+                        <padding><Insets top="14" right="14" bottom="14" left="14"/></padding>
+                        <HBox spacing="8">
+                            <TextField fx:id="profileNameField" promptText="Display Name"/>
+                            <TextField fx:id="profileBioField" promptText="Bio" HBox.hgrow="ALWAYS"/>
+                            <Button text="Update Profile" onAction="#onUpdateProfile"/>
+                        </HBox>
+                        <Button text="Refresh All Data" onAction="#onRefreshData"/>
+                    </VBox>
+                </Tab>
+
+                <Tab text="Posts / Feed">
+                    <VBox spacing="10" styleClass="tab-content">
+                        <padding><Insets top="14" right="14" bottom="14" left="14"/></padding>
+                        <HBox spacing="8">
+                            <TextArea fx:id="postContentField" promptText="What's on your mind?" prefRowCount="2" HBox.hgrow="ALWAYS"/>
+                            <ComboBox fx:id="privacyCombo" prefWidth="150"/>
+                            <Button text="Create Post" onAction="#onCreatePost"/>
+                        </HBox>
+                        <Label text="News Feed" styleClass="section-label"/>
+                        <ListView fx:id="feedList" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                </Tab>
+
+                <Tab text="Likes & Comments">
+                    <VBox spacing="10" styleClass="tab-content">
+                        <padding><Insets top="14" right="14" bottom="14" left="14"/></padding>
+                        <HBox spacing="8">
+                            <TextField fx:id="likePostIdField" promptText="Post ID"/>
+                            <Button text="Like Post" onAction="#onLikePost"/>
+                        </HBox>
+                        <HBox spacing="8">
+                            <TextField fx:id="commentPostIdField" promptText="Post ID"/>
+                            <TextField fx:id="commentContentField" promptText="Comment" HBox.hgrow="ALWAYS"/>
+                            <Button text="Add Comment" onAction="#onCommentPost"/>
+                        </HBox>
+                    </VBox>
+                </Tab>
+
+                <Tab text="Friends">
+                    <VBox spacing="10" styleClass="tab-content">
+                        <padding><Insets top="14" right="14" bottom="14" left="14"/></padding>
+                        <HBox spacing="8">
+                            <TextField fx:id="friendUserIdField" promptText="Your User ID"/>
+                            <TextField fx:id="friendTargetIdField" promptText="Friend User ID"/>
+                            <Button text="Send Request" onAction="#onSendFriendRequest"/>
+                        </HBox>
+                        <ListView fx:id="friendsList" VBox.vgrow="ALWAYS"/>
+                    </VBox>
+                </Tab>
+
+                <Tab text="Notifications & Search">
+                    <VBox spacing="10" styleClass="tab-content">
+                        <padding><Insets top="14" right="14" bottom="14" left="14"/></padding>
+                        <HBox spacing="8">
+                            <TextField fx:id="searchTextField" promptText="Search users/posts" HBox.hgrow="ALWAYS"/>
+                            <Button text="Search" onAction="#onSearch"/>
+                        </HBox>
+                        <SplitPane dividerPositions="0.5">
+                            <items>
+                                <VBox spacing="6">
+                                    <Label text="Notifications" styleClass="section-label"/>
+                                    <ListView fx:id="notificationsList" VBox.vgrow="ALWAYS"/>
+                                </VBox>
+                                <VBox spacing="6">
+                                    <Label text="Users & Search Results" styleClass="section-label"/>
+                                    <ListView fx:id="usersList" VBox.vgrow="ALWAYS"/>
+                                </VBox>
+                            </items>
+                        </SplitPane>
+                    </VBox>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
+</BorderPane>
